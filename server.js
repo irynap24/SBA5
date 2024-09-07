@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 5000;
+const port = 4000;
 
 // Mock data for users, posts, and comments
 const users = [
@@ -12,28 +12,24 @@ const users = [
 
 const posts = [
     {
-        id: 1, userId: 1, title: 'Attempted Grooming', body: 'Today, my human tried to GRAB me. I was peacefully napping when all of a sudden, I feel hands on me! I cant believe she would ever attempt such a thing! Luckily, Im faster than her and got away'
+        id: 1, userId: 1, title: 'Attempted Grooming', body: 'Today, my human tried to GRAB me. I was peacefully napping when all of a sudden, I feel hands on me! I cant believe she would ever attempt such a thing! Id rather be hopping around or munching on treats, not sitting still for a brushing!🍏🌟 #GroomingGrump #FluffyStruggles'
     },
-    { id: 2, userId: 1, title: 'Another Post by Apple', body: '!!!!!!!!.' },
+    { id: 2, userId: 1, title: 'Carrot Dreams and Cozy Naps', body: 'Hello, bunny buddies! 🥕✨ Ever dream of a giant carrot just for you? I do! But until then, lets enjoy our cozy burrows and a good nap. Sweet dreams, and may your day be as delightful as a sunny patch of clover! 🌸💤 #BunnyDreams #CozyCuddles' },
     {
-        id: 3, userId: 2, title: 'Am', body: 'cnvdfI'
+        id: 3, userId: 2, title: 'Parsley, my love', body: 'Hello, herb enthusiasts! 🐰🥳 Todays treat: PARSLEY! Its not just a garnish—its a bunnys delight! Crunchy, fresh, and oh-so-green, parsley is packed with nutrients and makes for a pawsitively delicious snack. Just a nibble here and there, and were hopping with joy! 🥗✨ #ParsleyLove #BunnyBites'
     },
-    {
-        id: 4, userId: 3, title: '?', body: ' fsmdf,nsdf'
-    }
 ];
 
 const comments = [
-    { id: 1, postId: 1, body: 'Great post!' },
-    { id: 2, postId: 2, body: 'Very informative, thanks!' },
-    { id: 3, postId: 3, body: 'I learned a lot from this.' },
-    { id: 4, postId: 4, body: 'Interesting perspective.' }
+    { id: 1, postId: 1, body: 'I cant believe this!!!😠✂️' },
+    { id: 2, postId: 2, body: 'Sweet dreams and crunchy snacks!😴💚' },
+    { id: 3, postId: 3, body: '🐰💚 #ParsleyParty.' },
 ];
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+app.use(express.static('public')); // Serve static files from the 'public' directory
 
 // Custom middleware to log requests
 function logRequests(req, res, next) {
@@ -44,12 +40,42 @@ function logRequests(req, res, next) {
 // Use the logging middleware for all routes
 app.use(logRequests);
 
-// Helper function to get random posts
-function getRandomPosts(num) {
-    const shuffled = [...posts].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, num);
-}
 
+// Favorites page route to display all posts and create new posts
+app.get('/favorites', (req, res) => {
+    res.send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Favorites Page</title>
+            <link rel="stylesheet" href="/favorites.css">
+        </head>
+        <body>
+            <h1>All Posts</h1>
+            <ul>
+                ${posts.map(post => `
+                    <li>
+                        <h2>${post.title}</h2>
+                        <p>${post.body}</p>
+                        <a href="/posts/${post.id}/comments">View Comments</a>
+                    </li>
+                `).join('')}
+            </ul>
+            <h2>Create a New Post</h2>
+            <form action="/posts" method="POST">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+                <br>
+                <label for="body">Body:</label>
+                <textarea id="body" name="body" required></textarea>
+                <br>
+                <button type="submit">Create Post</button>
+            </form>
+            <a href="/">Back to Home Page</a>
+        </body>
+        </html>
+    `);
+});
 
 // Posts routes
 app.get('/posts', (req, res, next) => {
@@ -133,6 +159,43 @@ app.delete('/posts/:id', (req, res, next) => {
         }
     } catch (error) {
         console.error('Error deleting post:', error); // Log the error
+        next(error); // Pass errors to the error-handling middleware
+    }
+});
+
+// Comments route to view comments for a specific post
+app.get('/posts/:id/comments', (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const postId = parseInt(id, 10); // Convert ID to integer
+        const post = posts.find(post => post.id === postId);
+
+        if (post) {
+            const postComments = comments.filter(comment => comment.postId === postId);
+            res.send(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Post Comments</title>
+                    <link rel="stylesheet" href="/styles.css">
+                </head>
+                <body>
+                    <h1>Comments for Post ${postId}</h1>
+                    <h2>${post.title}</h2>
+                    <p>${post.body}</p>
+                    <ul>
+                        ${postComments.map(comment => `
+                            <li>${comment.body}</li>
+                        `).join('')}
+                    </ul>
+                    <a href="/">Back to Home Page</a>
+                </body>
+                </html>
+            `);
+        } else {
+            res.status(404).json({ message: 'Post not found' });
+        }
+    } catch (error) {
         next(error); // Pass errors to the error-handling middleware
     }
 });
