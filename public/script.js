@@ -112,3 +112,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadPostComments(postId) {
         loadPage(`/api/posts/${postId}/comments`, data => renderComments(postId, data));
     }
+    mainContent.addEventListener('click', event => {
+        if (event.target && event.target.classList.contains('view-comments')) {
+            event.preventDefault();
+            const postId = event.target.getAttribute('data-id');
+            loadPostComments(postId);
+        }
+    });
+
+    if (mainContent.classList.contains('home-page')) {
+        loadPosts();
+    }
