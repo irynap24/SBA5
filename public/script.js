@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => callback(data))
             .catch(error => console.error('Error:', error));
     }
+
     function renderPosts(posts) {
         const postsList = document.getElementById('posts-list');
         postsList.innerHTML = posts.map(post => `
@@ -90,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </li>
         `).join('');
     }
+
     function renderComments(postId, comments) {
         const commentsList = document.getElementById('comments-list');
         const postIdElement = document.getElementById('post-id');
@@ -112,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadPostComments(postId) {
         loadPage(`/api/posts/${postId}/comments`, data => renderComments(postId, data));
     }
+
     mainContent.addEventListener('click', event => {
         if (event.target && event.target.classList.contains('view-comments')) {
             event.preventDefault();
