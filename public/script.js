@@ -80,3 +80,27 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => callback(data))
             .catch(error => console.error('Error:', error));
     }
+    function renderPosts(posts) {
+        const postsList = document.getElementById('posts-list');
+        postsList.innerHTML = posts.map(post => `
+            <li>
+                <h2>${post.title}</h2>
+                <p>${post.body}</p>
+                <a href="#" data-id="${post.id}" class="view-comments">View Comments</a>
+            </li>
+        `).join('');
+    }
+    function renderComments(postId, comments) {
+        const commentsList = document.getElementById('comments-list');
+        const postIdElement = document.getElementById('post-id');
+        const postTitleElement = document.getElementById('post-title');
+        const postBodyElement = document.getElementById('post-body');
+
+        postIdElement.textContent = postId;
+        postTitleElement.textContent = '';
+        postBodyElement.textContent = '';
+
+        commentsList.innerHTML = comments.map(comment => `
+            <li>${comment.body}</li>
+        `).join('');
+    }
