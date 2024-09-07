@@ -104,3 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <li>${comment.body}</li>
         `).join('');
     }
+
+    function loadPosts() {
+        loadPage('/api/posts', data => renderPosts(data));
+    }
+
+    function loadPostComments(postId) {
+        loadPage(`/api/posts/${postId}/comments`, data => renderComments(postId, data));
+    }
