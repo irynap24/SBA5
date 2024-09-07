@@ -68,3 +68,15 @@ document.getElementById('new-post-form').addEventListener('submit', async (event
         alert('Failed to create post. Please try again later.');
     }
 });
+
+// Initial fetch of posts when the page loads
+document.addEventListener('DOMContentLoaded', fetchPosts);
+document.addEventListener('DOMContentLoaded', () => {
+    const mainContent = document.querySelector('body');
+
+    function loadPage(url, callback) {
+        fetch(url)
+            .then(response => response.json())
+            .then(data => callback(data))
+            .catch(error => console.error('Error:', error));
+    }
