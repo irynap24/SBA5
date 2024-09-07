@@ -42,3 +42,29 @@ async function deletePost(postId) {
         alert('Failed to delete post. Please try again later.');
     }
 }
+
+// Event listener for the form to create a new post
+document.getElementById('new-post-form').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const title = document.getElementById('post-title').value;
+    const body = document.getElementById('post-body').value;
+
+    try {
+        const response = await fetch('/posts', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, body })
+        });
+
+        if (response.ok) {
+            alert('Post created successfully!');
+            fetchPosts(); // Refresh the list of posts
+        } else {
+            alert('Failed to create post. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error creating post:', error);
+        alert('Failed to create post. Please try again later.');
+    }
+});

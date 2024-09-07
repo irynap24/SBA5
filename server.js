@@ -5,14 +5,14 @@ const port = 5000;
 
 // Mock data for users, posts, and comments
 const users = [
-    { id: 1, name: 'Granny Smith', email: 'green.apple@example.com' },
-    { id: 2, name: 'Honey Crisp', email: 'jane.smith@example.com' },
-    { id: 3, name: 'Cosmic Crisp', email: 'baked.apple@example.com' }
+    { id: 1, name: 'Sunny ', email: 'sunny@apples.com' },
+    { id: 2, name: 'Cloud ', email: 'cloud@bananas.com' },
+    { id: 3, name: 'Casper ', email: 'casper@parsley.com' }
 ];
 
 const posts = [
     {
-        id: 1, userId: 1, title: 'A', body: 'Msfdfsdfsn.'
+        id: 1, userId: 1, title: 'Attempted Grooming', body: 'Today, my human tried to GRAB me. I was peacefully napping when all of a sudden, I feel hands on me! I cant believe she would ever attempt such a thing! Luckily, Im faster than her and got away'
     },
     { id: 2, userId: 1, title: 'Another Post by Apple', body: '!!!!!!!!.' },
     {
