@@ -123,3 +123,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (mainContent.classList.contains('home-page')) {
         loadPosts();
     }
+
+    // Handle form submission
+    const createPostForm = document.getElementById('create-post-form');
+    if (createPostForm) {
+        createPostForm.addEventListener('submit', event => {
+            event.preventDefault();
+            const formData = new FormData(createPostForm);
+            const postData = {
+                title: formData.get('title'),
+                body: formData.get('body')
+            };
+
+            fetch('/api/posts', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(postData)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Post created:', data);
+                    loadPosts(); // Refresh the list of posts
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    }
+});
