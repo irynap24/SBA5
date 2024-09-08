@@ -3,27 +3,18 @@
 
 <head>
     <title>Home Page</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 <body class="home-page">
-    <h1>The Bunny Blog</h1>
-    <ul id="posts-list"></ul>
-    <h2>Submit Your Hops</h2>
-    <form id="create-post-form" action="/api/posts" method="POST">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-        <br>
-        <label for="body">Body:</label>
-        <textarea id="body" name="body" required></textarea>
-        <br>
-        <button type="submit">Create Post</button>
-    </form>
+    <h1>Welcome to the Bunny Blog</h1>
+
     <a href="/favorites">
         <button class="faveBtn">
             <span class="button--inner">What's Everyone Hopping About?</span>
         </button>
     </a>
+    <!-- <a href="/favorites">What's everyone hopping about?</a> -->
 
     <script src="/public/script.js"></script>
 </body>

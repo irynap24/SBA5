@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorites Page</title>
+    <link rel="stylesheet" href="/favorites.css">
+</head>
+
+<body>
+    <h1>All Posts</h1>
+    <ul id="posts-list">
+        <% posts.forEach(post=> { %>
+            <li id="post-<%= post.id %>">
+                <h2>
+                    <%= post.title %>
+                </h2>
+                <p>
+                    <%= post.body %>
+                </p>
+                <a href="/posts/<%= post.id %>/comments">View Comments</a>
+                <button onclick="deletePost(<%= post.id %>)">Delete Post</button>
+
+            </li>
+            <% }); %>
+    </ul>
+
+    <h2>Create a New Post</h2>
+    <form id="create-post-form" action="/posts" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <br>
+        <label for="body">Body:</label>
+        <textarea id="body" name="body" required></textarea>
+        <br>
+        <button type="submit">Create Post</button>
+    </form>
+
+    <a href="/">
+        <button>Back to Home</button>
+    </a>
+
+    <script>
+        // Delete a post via an HTTP DELETE request
+        function deletePost(postId) {
+            fetch(`/posts/${postId}`, {
+                method: 'DELETE',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        // Remove the post element from the DOM
+                        const postElement = document.getElementById(`post-${postId}`);
+                        postElement.remove();
+                    } else {
+                        alert('Failed to delete post');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Handle form submission for creating a post without refreshing the page
+        document.getElementById('create-post-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const title = document.getElementById('title').value;
+            const body = document.getElementById('body').value;
+
+            // Create a new post via an HTTP POST request
+            fetch('/posts', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title, body }),
+            })
+                .then(response => response.json())
+                .then(post => {
+                    // Add the new post to the DOM
+                    const postList = document.getElementById('posts-list');
+                    const newPost = document.createElement('li');
+                    newPost.id = `post-${post.id}`;
+                    newPost.innerHTML = `
+                    <h2>${post.title}</h2>
+                    <p>${post.body}</p>
+                    <a href="/posts/${post.id}/comments">View Comments</a>
+                    <button onclick="deletePost(${post.id})">Delete Post</button>
+                `;
+                    postList.appendChild(newPost);
+
+                    // Clear the form
+                    document.getElementById('title').value = '';
+                    document.getElementById('body').value = '';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>
