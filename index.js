@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const port = 4004;
 
-// Import mock data from a separate file (optional)
+// Import mock data
 const { users, posts, comments } = require('./mockData');
 
 // Set up EJS as the template engine
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// Custom middleware to log requests
+// First custom middleware  to log requests
 function logRequests(req, res, next) {
     console.log(`${req.method} request for ${req.url}`);
     next();
