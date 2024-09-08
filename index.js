@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 4000;
-b
+const port = 4004;
+
 // Import mock data from a separate file (optional)
 const { users, posts, comments } = require('./mockData');
 

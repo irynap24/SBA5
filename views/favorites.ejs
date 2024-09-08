@@ -21,7 +21,8 @@
                     <%= post.body %>
                 </p>
                 <a href="/posts/<%= post.id %>/comments">View Comments</a>
-                <button onclick="deletePost(<%= post.id %>)">Delete Post</button>
+                <button onclick="deletePost('<%= post.id %>')">Delete Post</button>
+
 
             </li>
             <% }); %>
