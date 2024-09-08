@@ -11,7 +11,7 @@ NOTE:
 When testing the delete functionality, create a new post and delete that instead of deleting the mock data posts, makes it
 easier than restarting the server to reload the mock data.
 
-Edit Posts: Edit existing posts by using a PATCH request. When the user clicks "Edit," a form appears below the "Create Post" form to allow editing the selected post.
+Edit Posts: Edit existing posts by using a PATCH request. 
 View Comments: See comments associated with each post.
 Error Handling: Handles errors and provides user feedback.
 Cancel: Exits out of post editor form.
