@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 4000;
+const port = 8000;
 
 // Mock data for users, posts, and comments
 const users = [

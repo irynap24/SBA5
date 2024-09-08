@@ -1,0 +1,91 @@
+/* Favorites Page Specific Styles */
+
+/* Basic reset and global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eff1db;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Post list styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h2 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+p {
+  margin: 10px 0;
+  color: #666;
+}
+
+/* Form styles */
+form {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  background: #5a9;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #4a8;
+}
+
+/* Link styles */
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a[href="/"] {
+  display: block;
+  margin-top: 20px;
+  font-size: 14px;
+}
