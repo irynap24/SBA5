@@ -12,7 +12,7 @@ const posts = [
     },
     { id: 2, userId: 1, title: 'Carrot Dreams and Cozy Naps', body: 'Hello, bunny buddies! 🥕✨ Ever dream of a giant carrot just for you? I do! But until then, lets enjoy our cozy burrows and a good nap. Sweet dreams, and may your day be as delightful as a sunny patch of clover! 🌸💤 #BunnyDreams #CozyCuddles' },
     {
-        id: 3, userId: 2, title: 'Parsley, my love', body: 'Hello, herb enthusiasts! 🐰🥳 Todays treat: PARSLEY! Its not just a garnish—its a bunnys delight! Crunchy, fresh, and oh-so-green, parsley is packed with nutrients and makes for a pawsitively delicious snack. Just a nibble here and there, and were hopping with joy! 🥗✨ #ParsleyLove #BunnyBites'
+        id: 3, userId: 2, title: 'Parsley, my love', body: 'Hello, herb enthusiasts! 🐰🥳 Todays treat: PARSLEY!!! Its not just a garnish—its a bunnys delight! Crunchy, fresh, and oh-so-green, parsley is packed with nutrients and makes for a pawsitively delicious snack. Just a nibble here and there, and were hopping with joy! 🥗✨ #ParsleyLove #BunnyBites'
     },
 ];
 
